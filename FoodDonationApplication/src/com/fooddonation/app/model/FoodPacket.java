@@ -32,76 +32,16 @@ public abstract class FoodPacket {
 		this.state = addFoodPacketState;
 	}
 
-	public FoodPacketState getAddFoodPacketState() {
-		return addFoodPacketState;
-	}
-
-	public void setAddFoodPacketState(FoodPacketState addFoodPacketState) {
-		this.addFoodPacketState = addFoodPacketState;
-	}
-
 	public FoodPacketState getPickupFoodPacketState() {
 		return pickupFoodPacketState;
-	}
-
-	public void setPickupFoodPacketState(FoodPacketState pickupFoodPacketState) {
-		this.pickupFoodPacketState = pickupFoodPacketState;
 	}
 
 	public FoodPacketState getRemoveFoodPacketState() {
 		return removeFoodPacketState;
 	}
 
-	public void setRemoveFoodPacketState(FoodPacketState removeFoodPacketState) {
-		this.removeFoodPacketState = removeFoodPacketState;
-	}
-
-	public FoodPacketState getState() {
-		return state;
-	}
-
 	public void setState(FoodPacketState state) {
 		this.state = state;
-	}
-
-	public boolean isNutsIncluded() {
-		return nutsIncluded;
-	}
-
-	public void setNutsIncluded(boolean nutsIncluded) {
-		this.nutsIncluded = nutsIncluded;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public String getFoodType() {
-		return foodType;
-	}
-
-	public void setFoodType(String foodType) {
-		this.foodType = foodType;
 	}
 
 	public void addFoodPacket() {
@@ -109,8 +49,11 @@ public abstract class FoodPacket {
 	}
 
 	public void removeFoodPacket() {
-		state.pickupFoodPacket();
 		state.removeFoodPacketToCenter();
+	}
+
+	public void pickUpFoodPacket() {
+		state.pickupFoodPacket();
 	}
 
 	@Override

@@ -3,6 +3,9 @@ package com.fooddonation.app;
 import java.util.Scanner;
 
 import com.fooddonation.app.builder.FoodPacketBuilder;
+import com.fooddonation.app.command.AddFoodPacketCommand;
+import com.fooddonation.app.command.PickupFoodPacketCommand;
+import com.fooddonation.app.command.RemoveFoodPacketCommand;
 import com.fooddonation.app.factory.FoodPacketFactory;
 import com.fooddonation.app.model.FoodCenter;
 import com.fooddonation.app.model.FoodPacket;
@@ -17,6 +20,9 @@ public class FoodDonationApplication {
 
 		Scanner scanner = new Scanner(System.in);
 		FoodCenter foodCenter = new FoodCenter();
+		AddFoodPacketCommand addFoodPacketCommand = null;
+		PickupFoodPacketCommand pickupFoodPacketCommand = null;
+		RemoveFoodPacketCommand removeFoodPacketCommand = null;
 
 		do {
 
@@ -47,7 +53,8 @@ public class FoodDonationApplication {
 					FoodPacketBuilder builder = new FoodPacketBuilder().addType("VEG").addSize(1).addQuantity(1)
 							.addFoodType("BreakFast").addNuts(true);
 					FoodPacket vegBreakFastPacket = FoodPacketFactory.getFoodPacket(builder);
-					vegBreakFastPacket.addFoodPacket();
+					addFoodPacketCommand = new AddFoodPacketCommand(vegBreakFastPacket);
+					addFoodPacketCommand.execute();
 					foodCenter.getAvailablefoodPackets().add(vegBreakFastPacket);
 					foodCenter.getVegFoodPackets().add(vegBreakFastPacket);
 
@@ -56,7 +63,8 @@ public class FoodDonationApplication {
 					builder = new FoodPacketBuilder().addType("VEG").addSize(1).addQuantity(1).addFoodType("Lunch")
 							.addNuts(false);
 					FoodPacket vegLunch = FoodPacketFactory.getFoodPacket(builder);
-					vegLunch.addFoodPacket();
+					addFoodPacketCommand = new AddFoodPacketCommand(vegLunch);
+					addFoodPacketCommand.execute();
 					foodCenter.getAvailablefoodPackets().add(vegLunch);
 					foodCenter.getVegFoodPackets().add(vegLunch);
 
@@ -65,7 +73,8 @@ public class FoodDonationApplication {
 					builder = new FoodPacketBuilder().addType("VEG").addSize(1).addQuantity(1).addFoodType("Dinner")
 							.addNuts(false);
 					FoodPacket vegDinner = FoodPacketFactory.getFoodPacket(builder);
-					vegDinner.addFoodPacket();
+					addFoodPacketCommand = new AddFoodPacketCommand(vegDinner);
+					addFoodPacketCommand.execute();
 					foodCenter.getAvailablefoodPackets().add(vegDinner);
 					foodCenter.getVegFoodPackets().add(vegDinner);
 
@@ -74,7 +83,8 @@ public class FoodDonationApplication {
 					builder = new FoodPacketBuilder().addType("NON-VEG").addSize(1).addQuantity(1)
 							.addFoodType("Breakfast").addNuts(false);
 					FoodPacket nonvegBreakFastPacket = FoodPacketFactory.getFoodPacket(builder);
-					nonvegBreakFastPacket.addFoodPacket();
+					addFoodPacketCommand = new AddFoodPacketCommand(nonvegBreakFastPacket);
+					addFoodPacketCommand.execute();
 					foodCenter.getAvailablefoodPackets().add(nonvegBreakFastPacket);
 					foodCenter.getNonVegFoodPackets().add(nonvegBreakFastPacket);
 
@@ -83,7 +93,8 @@ public class FoodDonationApplication {
 					builder = new FoodPacketBuilder().addType("NON-VEG").addSize(1).addQuantity(1).addFoodType("Lunch")
 							.addNuts(true);
 					FoodPacket nonvegLunch = FoodPacketFactory.getFoodPacket(builder);
-					nonvegLunch.addFoodPacket();
+					addFoodPacketCommand = new AddFoodPacketCommand(nonvegLunch);
+					addFoodPacketCommand.execute();
 					foodCenter.getAvailablefoodPackets().add(nonvegLunch);
 					foodCenter.getNonVegFoodPackets().add(nonvegLunch);
 
@@ -92,7 +103,8 @@ public class FoodDonationApplication {
 					builder = new FoodPacketBuilder().addType("NON-VEG").addSize(1).addQuantity(1).addFoodType("Dinner")
 							.addNuts(true);
 					FoodPacket nonvegDinner = FoodPacketFactory.getFoodPacket(builder);
-					nonvegDinner.addFoodPacket();
+					addFoodPacketCommand = new AddFoodPacketCommand(nonvegDinner);
+					addFoodPacketCommand.execute();
 					foodCenter.getAvailablefoodPackets().add(nonvegDinner);
 					foodCenter.getNonVegFoodPackets().add(nonvegDinner);
 
@@ -134,7 +146,10 @@ public class FoodDonationApplication {
 
 						if (vegfp != null) {
 							foodCenter.getAvailablefoodPackets().remove(vegfp);
-							vegfp.removeFoodPacket();
+							pickupFoodPacketCommand = new PickupFoodPacketCommand(vegfp);
+							pickupFoodPacketCommand.execute();
+							removeFoodPacketCommand = new RemoveFoodPacketCommand(vegfp);
+							removeFoodPacketCommand.execute();
 						}
 
 					}
@@ -148,7 +163,10 @@ public class FoodDonationApplication {
 
 						if (nonvegfp != null) {
 							foodCenter.getAvailablefoodPackets().remove(nonvegfp);
-							nonvegfp.removeFoodPacket();
+							pickupFoodPacketCommand = new PickupFoodPacketCommand(nonvegfp);
+							pickupFoodPacketCommand.execute();
+							removeFoodPacketCommand = new RemoveFoodPacketCommand(nonvegfp);
+							removeFoodPacketCommand.execute();
 						}
 					}
 					break;
