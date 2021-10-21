@@ -6,6 +6,7 @@ public class FoodPacketBuilder {
 	int size;
 	int quantity;
 	String foodType;
+	// Iam Adding this point because some people has food allergy 
 	boolean nutsIncluded;
 
 	public FoodPacketBuilder addType(String type) {
